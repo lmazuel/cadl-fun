@@ -1,0 +1,11 @@
+{
+  "name": "clients",
+  "dependencies": {
+    "@cadl-lang/compiler": "latest",
+    "@cadl-lang/rest": "latest",
+    "@cadl-lang/openapi3": "latest",
+    "@azure-tools/cadl-python": "latest",
+    "@azure-tools/cadl-dpg": "latest"
+  },
+  "private": true
+}

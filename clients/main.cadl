@@ -1,0 +1,59 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/openapi3";
+
+import "@azure-tools/cadl-azure-core";
+
+using Cadl.Http;
+using Cadl.Rest;
+using Azure.Core;
+
+@service({
+  title: "Contoso Widget Manager",
+})
+namespace Contoso.WidgetManager;
+
+
+// Models ////////////////////
+
+@doc("A widget.")
+@resource("widgets")
+model Widget {
+  @key("widgetName")
+  @doc("The widget name.")
+  @visibility("read")
+  name: string;
+
+  @doc("The ID of the widget's manufacturer.")
+  manufacturerId: string;
+}
+
+
+// Operations ////////////////////
+
+interface Widgets {
+  // Operation Status
+  @doc("Gets status of a Widget operation.")
+  getWidgetOperationStatus is GetResourceOperationStatus<Widget>;
+
+  // Widget Operations
+  @doc("Creates or updates a Widget asynchronously")
+  @pollingOperation(Widgets.getWidgetOperationStatus)
+  createOrUpdateWidget is LongRunningResourceCreateOrUpdate<Widget>;
+
+  @doc("Get a Widget")
+  getWidget is ResourceRead<Widget>;
+
+  @doc("Delete a Widget asynchronously.")
+  @pollingOperation(Widgets.getWidgetOperationStatus)
+  deleteWidget is LongRunningResourceDelete<Widget>;
+
+  @doc("List Widget resources")
+  listWidgets is ResourceList<
+    Widget,
+    {
+      parameters: StandardListQueryParameters & SelectQueryParameter;
+    }
+  >;
+
+
+}

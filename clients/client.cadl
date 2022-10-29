@@ -1,0 +1,30 @@
+import "./main.cadl";
+
+import "@azure-tools/cadl-dpg";
+
+using Azure.DPG;
+
+// @@client(Contoso.WidgetManager, {
+//     name: "WidgetManagerAwesomeClient",
+// });
+
+namespace Customizations;
+
+@client({
+    name: "WidgetManagerAwesomeClient",
+    service: Contoso.WidgetManager
+})
+interface OpGrp1 {
+    getWidgetOperationStatus is Contoso.WidgetManager.Widgets.getWidgetOperationStatus;
+    createOrUpdateWidget is Contoso.WidgetManager.Widgets.createOrUpdateWidget;
+}
+
+@client({
+    name: "SubSub.WidgetManagerAwesomeClient",
+    service: Contoso.WidgetManager
+})
+interface OpGrp2 {
+    getWidget is Contoso.WidgetManager.Widgets.getWidget;
+    deleteWidget is Contoso.WidgetManager.Widgets.deleteWidget;
+    listWidgets is Contoso.WidgetManager.Widgets.listWidgets;
+}

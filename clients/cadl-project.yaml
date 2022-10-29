@@ -1,0 +1,6 @@
+emitters:
+  #'@cadl-lang/openapi3': true
+  "@azure-tools/cadl-python": true
+  #   "basic-setup-py": true
+  #   "package-version":
+  #   "package-name":
